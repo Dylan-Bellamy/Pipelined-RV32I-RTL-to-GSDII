@@ -1,5 +1,5 @@
 /*
-    Instruction Memory
+    Instruction Memory (Program Memory)
     - Stores instructions
     - Inputs and Outputs
         - address: Given by program counter to get instruction at memory location
