@@ -9,11 +9,11 @@
         - Zero Flag: Becomes HIGH when the result is equal to zero
 */
 module ALU(
-    input [2:0] opcode,
-    input [31:0] A,
-    input [31:0] B,
+    input wire [2:0] opcode,
+    input wire [31:0] A,
+    input wire [31:0] B,
     output reg [31:0] result,
-    output zero_flag
+    output wire zero_flag
 );
     always @(*) begin
         case(opcode) 
@@ -24,10 +24,10 @@ module ALU(
             3'b100: result = A << B;            // Shift Logical Left
             3'b101: result = A >> B;            // Shift Logical Right
             3'b110: result = A ^ B;             // XOR Gate
-            3'b111: result = (A < B) ? 1 : 0;   // A less than B?
+            3'b111: result = (A < B) ? 32'b1 : 32'b0;   // A less than B?
         endcase
     end
     // If result is equal to zero, return 1 else 0
-    assign zero_flag = (result == 32'b0) ? 1 : 0;   
+    assign zero_flag = (result == 32'b0) ? 1'b1 : 1'b0;   
 endmodule
     

@@ -10,9 +10,9 @@ module instruction_memory(
     output [31:0] instruction
 );
     // Four bytes of addressable memory with 256 locations
-    reg [31:0] memory [256:0]; 
+    reg [31:0] memory [255:0]; 
 
-
+	 integer i;
     // Initializing instructions in memory
     initial begin
         // instruction set eq. {funct7, rs2, rs1, funct3, rd, opcode}
@@ -33,6 +33,9 @@ module instruction_memory(
         memory[14] = {7'b0000000, 5'b01101, 5'b01110, 3'b001, 5'b00000, 7'b1100011}; // bne x13, x14, 0
         memory[15] = {20'b00000000000000000001, 5'b00001, 7'b1101111}; // jal x1, 1
         // Note: more instructions can be added up
+		  for(i = 16; i < 256; i = i + 1) begin
+			   memory[i] = 32'b0;
+		  end
     end
 
     /*  
@@ -40,5 +43,5 @@ module instruction_memory(
         lower two bits of address can be truncated 
         because program counter increments by 4 
     */
-    assign instruction = {memory[address[31:2]]};
+    assign instruction = {memory[address[9:2]]};
 endmodule

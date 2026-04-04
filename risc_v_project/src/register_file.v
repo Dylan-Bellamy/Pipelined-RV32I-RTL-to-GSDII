@@ -27,7 +27,11 @@ module register_file(
     reg [31:0] reg_data [31:0];
 
     integer i;
-    
+    initial begin
+		  for (i = 0; i < 32; i = i + 1) begin
+			   reg_data[i] = i;
+		  end
+	 end
     always @(posedge clk) begin
         // if reset is HIGH, loads and overwrites registers with set values
         if (reset) begin

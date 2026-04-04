@@ -4,18 +4,24 @@
     - Inputs and Outputs
         - Clock: 0->1 changes the pc counter to the next instruction
         - Reset: Resets program counter to zero
-        - PC : The address of the next instruction
+		  - d: Instruction address
+        - q: The address of the current instruction
+		  - q_add_4: The address of the next instruction
 */
 module program_counter(
-    input clk,
-    input reset,
-    output reg [31:0] pc
+    input wire clk,
+    input wire reset,
+	 input wire [31:0] d,
+	 output reg [31:0] q,
+    output reg [31:0] q_add_4
 );
-    always @(posedge clk) begin
+    always @(posedge clk or posedge reset) begin
         if (reset) begin
-            pc <= 32'h0;
+            q <= 32'h0;
+				q_add_4 <= 32'h0;
         end else begin
-            pc <= pc + 4;
+				q <= d;
+            q_add_4 <= d + 4;
         end
     end
 endmodule 
