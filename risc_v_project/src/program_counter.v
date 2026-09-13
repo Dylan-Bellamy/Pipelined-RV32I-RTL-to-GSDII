@@ -11,16 +11,17 @@
 module program_counter(
     input wire clk,
     input wire reset,
-	 input wire [31:0] d,
-	 output reg [31:0] q,
+    input wire stall,
+	input wire [31:0] d,
+	output reg [31:0] q,
     output reg [31:0] q_add_4
 );
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             q <= 32'h0;
-				q_add_4 <= 32'h0;
-        end else begin
-				q <= d;
+            q_add_4 <= 32'h0;
+        end else if (~stall) begin
+            q <= d;
             q_add_4 <= d + 4;
         end
     end
