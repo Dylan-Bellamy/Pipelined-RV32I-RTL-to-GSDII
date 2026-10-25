@@ -1,4 +1,4 @@
-# Fully Synthesizable 5-Stage Pipelined RISC-V (RV32I) Processor
+# Fully Synthesizable Pipelined RISC-V (RV32I) Processor
 
 A 32-bit, 5-stage pipelined RISC-V CPU written in Verilog/SystemVerilog and built in Xilinx Vivado. The design is fully synthesizable and was taken through synthesis and implementation with timing constraints (SDC) and static timing analysis (STA) to find and fix critical-path violations.
 
